@@ -1,4 +1,4 @@
-from data_conn import get_data
+#from data_conn import get_data
 import pandas as pd
 import json
 import streamlit as st
