@@ -15,9 +15,10 @@ class Recomendacion:
             category = self.prod_df[self.prod_df['CODIGOPRODUCTO']==prod_cod]['CATEGORIA'].values[0]
             price = self.prod_df[self.prod_df['CODIGOPRODUCTO']==prod_cod]['AVG_PRICE'].values[0]
             relacionados = self.prod_df[(self.prod_df['CATEGORIA']==category) & (self.prod_df['CODIGOPRODUCTO']!=prod_cod)][['CODIGOPRODUCTO','DESCRIPCION','AVG_PRICE']]
+            relacionados['change'] = relacionados['AVG_PRICE']-price
             relacionados['diff'] = np.abs(relacionados['AVG_PRICE']-price)
             relacionados = relacionados.sort_values(by='diff',ascending=True)
-            return relacionados[['CODIGOPRODUCTO','DESCRIPCION','AVG_PRICE']].iloc[:20].to_json(orient="records")
+            return relacionados.iloc[:20].to_json(orient="records")
         except:
             return 'No recomendation'
 
