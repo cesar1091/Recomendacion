@@ -24,13 +24,15 @@ if choice == 'Clientes a llamar':
 if choice == 'Recomendacion por cliente y pedido':
     cliente = st.sidebar.selectbox("Seleccione un cliente:",list(data['CODIGOCLIENTE'].unique()))
     producto = st.sidebar.selectbox("Seleccione a un producto:",list(data[data['CODIGOCLIENTE']==cliente]['CODIGOPRODUCTO'].unique()))
-    st.write(f'El cliente de código {cliente} se le recomienda:')
+    df_cliente = test.clientes_call()
+    cantidad = df_cliente[df_cliente['CODIGOCLIENTE]==cliente]['AVGLAGUNIT'].values[0]
+    st.write(f'El cliente de código {cliente} se le recomienda {cantidad} unidades de los siguientes productos:')
     a = data[(data['CODIGOCLIENTE']==cliente) & (data['CODIGOPRODUCTO']==producto)]['Recomendacion'].values[0]
 
     try:
         to_python = json.loads(a)
         tabla = pd.DataFrame(to_python)
-        st.table(tabla)
+        st.table(tabla.iloc[:,:2])
     except json.decoder.JSONDecodeError:
         st.write('No tiene recomendacion')
 
