@@ -22,7 +22,7 @@ if choice == 'Clientes a llamar':
     call_df.index = range(len(call_df))
     cliente = st.sidebar.selectbox("Clientes pedidos regular:",list(call_df['CODIGOCLIENTE'].unique()))
     df_show = call_df[call_df['CODIGOCLIENTE']==cliente][['CODIGOPRODUCTO','AVGLAGUNIT']]
-    df_show.index = range(len(df_show))
+    df_show.index = cliente
     st.table(df_show)
 if choice == 'Recomendacion por cliente y pedido':
     cliente = st.sidebar.selectbox("Seleccione un cliente:",list(data['CODIGOCLIENTE'].unique()))
