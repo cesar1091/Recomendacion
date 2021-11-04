@@ -10,3 +10,4 @@ def get_data():
     list_product.to_csv('list_prod.csv')
     print("Done!!!")
 
+get_data()
