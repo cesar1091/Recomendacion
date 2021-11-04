@@ -20,7 +20,8 @@ choice = st.sidebar.radio('Seleccionar:',('Clientes a llamar','Recomendacion por
 if choice == 'Clientes a llamar':
     call_df = test.clientes_call()
     call_df.index = range(len(call_df))
-    st.table(call_df)
+    cliente = st.sidebar.selectbox("Clientes pedidos regular:",list(call_df['CODIGOCLIENTE'].unique()))
+    st.table(call_df[call_df['CODIGOCLIENTE']==cliente][['CODIGOPRODUCTO','AVGLAGUNIT']])
 if choice == 'Recomendacion por cliente y pedido':
     cliente = st.sidebar.selectbox("Seleccione un cliente:",list(data['CODIGOCLIENTE'].unique()))
     producto = st.sidebar.selectbox("Seleccione a un producto:",list(data[data['CODIGOCLIENTE']==cliente]['CODIGOPRODUCTO'].unique()))
