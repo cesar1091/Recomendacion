@@ -24,8 +24,7 @@ if choice == 'Clientes a llamar':
 if choice == 'Recomendacion por cliente y pedido':
     cliente = st.sidebar.selectbox("Seleccione un cliente:",list(data['CODIGOCLIENTE'].unique()))
     producto = st.sidebar.selectbox("Seleccione a un producto:",list(data[data['CODIGOCLIENTE']==cliente]['CODIGOPRODUCTO'].unique()))
-    df_cliente = test.clientes_call()
-    cantidad = df_cliente[df_cliente['CODIGOCLIENTE]==cliente]['AVGLAGUNIT'].values[0]
+    cantidad = client_product[client_product["CODIGOCLIENTE"]==cliente]["AVGLAGUNIT"].values[0]
     st.write(f'El cliente de código {cliente} se le recomienda {cantidad} unidades de los siguientes productos:')
     a = data[(data['CODIGOCLIENTE']==cliente) & (data['CODIGOPRODUCTO']==producto)]['Recomendacion'].values[0]
 
