@@ -21,7 +21,7 @@ if choice == 'Clientes a llamar':
     call_df = test.clientes_call()
     call_df.index = range(len(call_df))
     cliente = st.sidebar.selectbox("Clientes pedidos regular:",list(call_df['CODIGOCLIENTE'].unique()))
-    df_show = call_df[call_df['CODIGOCLIENTE']==cliente][['CODIGOCLIENTE','CODIGOPRODUCTO','AVGLAGUNIT']]
+    df_show = call_df[call_df['CODIGOCLIENTE']==cliente][['CODIGOCLIENTE','CODIGOPRODUCTO','TIPOUNIDADMIN','AVGLAGUNIT']]
     csv = call_df.to_csv().encode('utf-8')
     st.sidebar.download_button(label="Descargar clientes a llamar",data=csv,file_name="Clients.csv")
     df_show = df_show.set_index('CODIGOCLIENTE')
